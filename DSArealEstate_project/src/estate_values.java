@@ -7,8 +7,7 @@ public class estate_values {
 	private double square_feet;
 	private int no_of_bedroom;
 	public estate_values(String lotno, String fname, String lname,
-			double price, double square_feet, int no_of_bedroom)
-	{
+			double price, double square_feet, int no_of_bedroom) {
 		super();
 		this.lotno = lotno;
 		this.fname = fname;
@@ -54,5 +53,5 @@ public class estate_values {
 		this.no_of_bedroom = no_of_bedroom;
 	}
 	
-
+	
 }

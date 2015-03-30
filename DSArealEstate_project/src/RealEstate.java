@@ -16,6 +16,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class RealEstate {
@@ -58,9 +60,10 @@ public class RealEstate {
 		
 		estate_values e2 = new estate_values("2", "prabath", "madusanka", 234000, 450, 4); 
 		estateList.add(e2);	
-		estate_values e3 = new estate_values("3", "saman", "bandara", 344000, 550, 5); 
-		estateList.add(e3);
+		estate_values e3 = new estate_values("3"," saman"," bandara", 344000, 550, 5); 
+		estateList.add(e3);	
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -130,18 +133,63 @@ public class RealEstate {
 		frmRealEstate.getContentPane().add(lblNewLabel_4);
 		
 		JButton ResetbtnNewButton = new JButton("Reset");
+		ResetbtnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				displayedEstate=0;
+				
+			}
+		});
 		ResetbtnNewButton.setBackground(new Color(144, 238, 144));
 		ResetbtnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		ResetbtnNewButton.setBounds(76, 281, 138, 38);
 		frmRealEstate.getContentPane().add(ResetbtnNewButton);
 		
 		JButton addbtnNewButton_1 = new JButton("Add");
+		addbtnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0)
+			
+			{
+				
+				/*if(displayedEstate!=estateList.size())
+				{
+					
+					
+					lotnumbertextField.setText(estateList.get(displayedEstate++).getLotno());
+					firstnametextField_1.setText(estateList.get(displayedEstate).getFname());
+					lastnametextField_2.setText(estateList.get(displayedEstate).getLname());
+					pricetextField_3.setText(estateList.get(displayedEstate).getPrice());
+					squafeattextField_4.setText(estateList.get(displayedEstate).getSquare_feet());
+					numberofbedtextField_5.setText(estateList.get(displayedEstate).getNo_of_bedroom());
+				}*/
+				
+				
+			
+		double prz = Double.parseDouble(pricetextField_3.getText());
+		double sqr = Double.parseDouble(squafeattextField_4.getText());
+		int nob = Integer.parseInt(numberofbedtextField_5.getText());
+				
+				estate_values newEstate = new estate_values(lotnumbertextField.getText(), firstnametextField_1.getText(), lastnametextField_2.getText(),prz, sqr, nob);
+				estateList.add(newEstate);
+			}
+		});
+		
 		addbtnNewButton_1.setBackground(new Color(144, 238, 144));
 		addbtnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		addbtnNewButton_1.setBounds(76, 325, 138, 38);
 		frmRealEstate.getContentPane().add(addbtnNewButton_1);
 		
 		JButton clearbtnNewButton_2 = new JButton("Clear");
+		clearbtnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lotnumbertextField.setText("");
+				firstnametextField_1.setText("");
+				lastnametextField_2.setText("");
+				pricetextField_3.setText("");
+				squafeattextField_4.setText("");
+				numberofbedtextField_5.setText("");
+			}
+		});
 		clearbtnNewButton_2.setBackground(new Color(144, 238, 144));
 		clearbtnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		clearbtnNewButton_2.setBounds(76, 370, 138, 38);
@@ -151,23 +199,19 @@ public class RealEstate {
 		NextbtnNewButton_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
-				
-				
-if(displayedEstate!=estateList.size()){
-	
-					
-	lotnumbertextField.setText(estateList.get(displayedEstate++).getLotno());
-	firstnametextField_1.setText(estateList.get(displayedEstate).getFname());
-	lastnametextField_2.setText(estateList.get(displayedEstate).getLname());
-	pricetextField_3.setText(String.valueOf(estateList.get(displayedEstate).getPrice()));
-	squafeattextField_4.setText(String.valueOf(estateList.get(displayedEstate).getSquare_feet()));
-	numberofbedtextField_5.setText(String.valueOf(estateList.get(displayedEstate).getNo_of_bedroom()));
-					
-}
-				
+						
+				if(displayedEstate!=estateList.size()){										
+					lotnumbertextField.setText(estateList.get(displayedEstate).getLotno());
+					firstnametextField_1.setText(estateList.get(displayedEstate).getFname());
+					lastnametextField_2.setText(estateList.get(displayedEstate).getLname());
+					pricetextField_3.setText(String.valueOf(estateList.get(displayedEstate).getPrice()));
+					squafeattextField_4.setText(String.valueOf(estateList.get(displayedEstate).getSquare_feet()));
+					numberofbedtextField_5.setText(String.valueOf(estateList.get(displayedEstate).getNo_of_bedroom()));
+					displayedEstate++;				
+				}
 				
 			}
+			
 		});
 		NextbtnNewButton_3.setBackground(new Color(144, 238, 144));
 		NextbtnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -175,6 +219,20 @@ if(displayedEstate!=estateList.size()){
 		frmRealEstate.getContentPane().add(NextbtnNewButton_3);
 		
 		JButton deletebtnNewButton_4 = new JButton("Delete");
+		deletebtnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				
+				double prz = Double.parseDouble(pricetextField_3.getText());
+				double sqr = Double.parseDouble(squafeattextField_4.getText());
+				int nob = Integer.parseInt(numberofbedtextField_5.getText());
+						
+						estate_values newEstate = new estate_values(lotnumbertextField.getText(), firstnametextField_1.getText(), lastnametextField_2.getText(),prz, sqr, nob);
+						estateList.remove(newEstate);
+			}
+		});
 		deletebtnNewButton_4.setBackground(new Color(144, 238, 144));
 		deletebtnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		deletebtnNewButton_4.setBounds(244, 325, 138, 38);
